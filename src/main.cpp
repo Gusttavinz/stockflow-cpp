@@ -23,7 +23,8 @@ int main() {
         std::cout << "1 - Cadastrar produto\n";
         std::cout << "2 - Listar produtos\n";
         std::cout << "3 - Buscar produto\n";
-        std::cout << "4 - Sair\n";
+        std::cout << "4 - Editar produto\n";
+        std::cout << "5 - Sair\n";
         std::cout << "Escolha uma opcao: ";
         std::cin >> opcao;
         switch (opcao) {
@@ -63,7 +64,7 @@ int main() {
             }
                 break;
 
-            case 3:
+            case 3: {
                 std::cout << "\n--- BUSCAR PRODUTO ---\n";
                 int id_busca;
                 std::cout << "Digite o ID do produto a ser buscado: ";
@@ -79,14 +80,40 @@ int main() {
                         std::cout << "Quantidade: " << p.quantidade << "\n";
                         encontrado = true;
                         break;
+                    
                     }
                 }
                 if (!encontrado) {
                     std::cout << "Produto nao encontrado.\n";
                 }
                 break;
+            }
+            case 4: {
+                std::cout << "\n--- EDITAR PRODUTO ---\n";
+                int id_editar;
+                std::cout << "Digite o ID do produto a ser editado: ";
+                std::cin >> id_editar;
 
-            case 4:
+                bool editado = false;
+                for (auto& p : produtos) {
+                    if (p.id == id_editar) {
+                        std::cout << "Produto encontrado. Digite os novos dados:\n";
+                        std::cout << "Novo nome: ";
+                        std::cin >> p.nome;
+                        std::cout << "Novo preco: ";
+                        std::cin >> p.preco;
+                        std::cout << "Nova quantidade: ";
+                        std::cin >> p.quantidade;
+                        editado = true;
+                        break;
+                    }
+                }
+                if (!editado) {
+                    std::cout << "Produto nao encontrado.\n";
+                }
+                break;
+            }
+            case 5:
                 std::cout << "\nSaindo do StockFlow...\n";
                 break;
 
@@ -94,7 +121,7 @@ int main() {
                 std::cout << "\nOpcao invalida!\n";
         }
 
-    } while (opcao != 4);
+    } while (opcao != 5);
 
     return 0;
 }
